@@ -11,7 +11,14 @@ exports.up = function(knex) {
         .references('id')
         .inTable('tasks')
         .onDelete('CASCADE')
-        .onUpdate('CASCADE')
+        .onUpdate('CASCADE');
+        tbl.integer('resource_id')
+        .unsigned()
+        .references('id')
+        .inTable('resources')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE');
+
 
     })
     .createTable('resources', tbl => {
