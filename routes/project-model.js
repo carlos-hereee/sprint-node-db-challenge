@@ -28,9 +28,11 @@ function getTasks(id) {
 }
 
 function getResources(id) {
-  return db('resources').where( {id})
-        .first();
-}
+  return db('projects as p')
+  .join('project_resources as pr', 'pr.project_id', 'p.id')
+  .join('resources as r', 'r.id', 'pr.resource_id')
+  .select('r.id', 'r.name', 'r.resource_description', 'r.project_id')
+  .where('pr.project_id', id);}
 
 function addProject(project) {
   return db('projects as p')

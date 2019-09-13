@@ -54,6 +54,7 @@ router.get('/:id/resources', (req, res) => {
       res.status(200).json(resources);
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({
         message: 'Error occurred while getting resources.',
         err: err,
@@ -64,7 +65,7 @@ router.get('/:id/resources', (req, res) => {
 router.post('/', (req, res) => {
   const projectData = req.body;
 
-  if (!Object.keys(projectData).includes('name')) {
+  if (!Object.keys(projectData).includes('project_name')) {
     return res.status(400).json({ message: 'Invalid data.' });
   }
 
@@ -73,7 +74,9 @@ router.post('/', (req, res) => {
       res.status(201).json(project);
     })
     .catch(err => {
+
       res.status(500).json({
+        
         message: 'Error occurred while adding a new project.',
         err: err,
       });
